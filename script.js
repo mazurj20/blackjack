@@ -55,10 +55,6 @@ class Player {
                 hardSoft[0]+=rank[0]
                 hardSoft[1]+=rank[0]
                     
-                    
-                
-                
-                
             }
             else if (typeof rank[0] === "string") {
                 if (rank[0] === "Ace") {
@@ -73,16 +69,19 @@ class Player {
                     hardSoft[1]+=10
                     
                 }
+            } 
+        }
+        console.log(hardSoft);
+
+        let dealerTurn = () => {
+            if (hardSoft[0] === hardSoft[1]) {
+                console.log("no aces");
             }
             
         }
-        
-        console.log(hardSoft);
-        
+        dealerTurn()
     }
-    dealerCards() {
-
-    }
+    
 }
 
 
