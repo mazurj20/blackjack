@@ -64,10 +64,30 @@ class Player {
     }
     stand() {
         let dealerSum = 0
+        let softSum = 1
         for (let rank of this.dealer) {
-            dealerSum+=rank[0]
+            if (typeof rank[0] === "number") {
+                dealerSum+=rank[0]
+                
+            }
+            else if (typeof rank[0] === "string") {
+                if (rank[0] === "Ace") {
+                    let hardSoft = []
+                    softSum+=dealerSum
+                    dealerSum+=11
+                    hardSoft.push(dealerSum,softSum)
+                    console.log(hardSoft);
+                    
+                }
+                else {
+                    dealerSum+=10
+                    
+                }
+            }
+            
         }
-        console.log(dealerSum)
+        console.log(dealerSum);
+        
     }
 }
 
