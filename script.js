@@ -20,23 +20,7 @@ class Deck {
         }
     }
 
-    /* deal() {
-        let dealer = []
-        let player = []
-        for (let i=0;i<4;i++) {
-            if (i % 2 === 0) {
-                player.push(this.cards[0])
-                this.cards.shift()
-            }
-            else {
-                dealer.push(this.cards[0])
-                this.cards.shift()
-            }
-            
-        }
-        console.log(dealer)
-        console.log(player)
-    } */
+    
 }
 
 newDeck = new Deck()
@@ -63,31 +47,41 @@ class Player {
         newDeck.cards.shift()
     }
     stand() {
-        let dealerSum = 0
-        let softSum = 1
+      
+        let hardSoft = [0,0]
         for (let rank of this.dealer) {
             if (typeof rank[0] === "number") {
-                dealerSum+=rank[0]
+                
+                hardSoft[0]+=rank[0]
+                hardSoft[1]+=rank[0]
+                    
+                    
+                
+                
                 
             }
             else if (typeof rank[0] === "string") {
                 if (rank[0] === "Ace") {
-                    let hardSoft = []
-                    softSum+=dealerSum
-                    dealerSum+=11
-                    hardSoft.push(dealerSum,softSum)
-                    console.log(hardSoft);
+                   
+                    hardSoft[0]+=11
+                    hardSoft[1]+=1
                     
                 }
                 else {
-                    dealerSum+=10
+                    
+                    hardSoft[0]+=10
+                    hardSoft[1]+=10
                     
                 }
             }
             
         }
-        console.log(dealerSum);
         
+        console.log(hardSoft);
+        
+    }
+    dealerCards() {
+
     }
 }
 
