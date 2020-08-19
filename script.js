@@ -62,14 +62,22 @@ class Player {
         this.player.push(newDeck.cards[0])
         newDeck.cards.shift()
     }
+    stand() {
+        let dealerSum = 0
+        for (let rank of this.dealer) {
+            dealerSum+=rank[0]
+        }
+        console.log(dealerSum)
+    }
 }
 
 
 
 //console.log(newDeck.cards)
 hand = new Player
-console.log(hand.player)
-//console.log(hand.dealer)
+//console.log(hand.player)
+console.log(hand.dealer)
 //console.log(newDeck.cards)
-hand.hit()
-console.log(hand.player)
+//hand.hit()
+//console.log(hand.player)
+console.log(hand.stand())
