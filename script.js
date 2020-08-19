@@ -58,11 +58,18 @@ class Player {
             }  
         }
     }
+    hit() {
+        this.player.push(newDeck.cards[0])
+        newDeck.cards.shift()
+    }
 }
 
 
 
-console.log(newDeck.cards)
+//console.log(newDeck.cards)
 hand = new Player
 console.log(hand.player)
-console.log(hand.dealer)
+//console.log(hand.dealer)
+//console.log(newDeck.cards)
+hand.hit()
+console.log(hand.player)
