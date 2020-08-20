@@ -43,31 +43,35 @@ class Player {
                 newDeck.cards.shift()
             }  
         }
-        
-         let hardSoftPlayer = this.hardSoftPlayer
-        for (let rank of this.player) {
-            if (typeof rank[0] === "number") {
+        let hardSoft = (array,hand) => {
+            let hardSoftHand = array
+            for (let rank of hand) {
+                if (typeof rank[0] === "number") {
             
-                hardSoftPlayer[0]+=rank[0]
-                hardSoftPlayer[1]+=rank[0]
-                
+                    hardSoftHand[0]+=rank[0]
+                    hardSoftHand[1]+=rank[0]
+                    
+                }
+                else if (typeof rank[0] === "string") {
+                    if (rank[0] === "Ace") {
+                   
+                        hardSoftHand[0]+=11
+                        hardSoftHand[1]+=1
+                    
+                    }
+                    else {
+                    
+                        hardSoftHand[0]+=10
+                        hardSoftHand[1]+=10
+                    
+                    }
+                 } 
             }
-            else if (typeof rank[0] === "string") {
-                if (rank[0] === "Ace") {
-               
-                    hardSoftPlayer[0]+=11
-                    hardSoftPlayer[1]+=1
-                
-                }
-                else {
-                
-                    hardSoftPlayer[0]+=10
-                    hardSoftPlayer[1]+=10
-                
-                }
-             } 
+            console.log(hardSoftHand)
         }
-        let hardSoftDealer = this.hardSoftDealer
+        hardSoft(this.hardSoftPlayer,this.player)
+        
+        /* let hardSoftDealer = this.hardSoftDealer
 
         for (let rank of this.dealer) {
             if (typeof rank[0] === "number") {
@@ -90,11 +94,11 @@ class Player {
                 
                 }
              } 
-        }
-    console.log("dealer count:");
-    console.log(hardSoftDealer);
+        } */
+    //console.log("dealer count:");
+    //console.log(hardSoftDealer);
     console.log("player count");
-    console.log(hardSoftPlayer);
+    //console.log(hardSoftHand);
         
         
         
