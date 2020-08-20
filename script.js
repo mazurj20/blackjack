@@ -70,31 +70,9 @@ class Player {
             console.log(hardSoftHand)
         }
         hardSoft(this.hardSoftPlayer,this.player)
+        hardSoft(this.hardSoftDealer,this.dealer)
         
-        /* let hardSoftDealer = this.hardSoftDealer
-
-        for (let rank of this.dealer) {
-            if (typeof rank[0] === "number") {
-            
-                hardSoftDealer[0]+=rank[0]
-                hardSoftDealer[1]+=rank[0]
-                
-            }
-            else if (typeof rank[0] === "string") {
-                if (rank[0] === "Ace") {
-               
-                    hardSoftDealer[0]+=11
-                    hardSoftDealer[1]+=1
-                
-                }
-                else {
-                
-                    hardSoftDealer[0]+=10
-                    hardSoftDealer[1]+=10
-                
-                }
-             } 
-        } */
+        
     //console.log("dealer count:");
     //console.log(hardSoftDealer);
     console.log("player count");
