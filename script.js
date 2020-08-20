@@ -127,7 +127,7 @@ class Player {
                 }
             } 
         
-        console.log(hardSoftPlayer);
+        //console.log(hardSoftPlayer);
         if (hardSoftPlayer[1] > 21) {
             return console.log("bust, dealer wins");
         }
@@ -237,9 +237,15 @@ class Player {
     
 }
 
+
+hand = new Player
    
-   
-    
+/* let hit = document.querySelector(".hit")
+let stand = document.querySelector(".stand")
+
+hit.addEventListener("click",hand.hitPlayer())
+stand.addEventListener("click",hand.stand())
+*/
 
     
     
@@ -249,7 +255,7 @@ class Player {
 
 
 //console.log(newDeck.cards)
-hand = new Player
+
 //console.log("dealer hand");
 //console.log(hand.dealer)
 //console.log("player hand");
