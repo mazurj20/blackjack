@@ -69,53 +69,49 @@ class Player {
             }
             console.log(hardSoftHand)
         }
+        console.log("player count");
         hardSoft(this.hardSoftPlayer,this.player)
+        console.log("dealer count");
         hardSoft(this.hardSoftDealer,this.dealer)
-        
-        
-    //console.log("dealer count:");
-    //console.log(hardSoftDealer);
-    console.log("player count");
-    //console.log(hardSoftHand);
-        
-        
         
     }
     
-    hitPlayer() {
-        this.player.push(newDeck.cards[0])
+    hit(hand,array) {
+        hand.push(newDeck.cards[0])
         newDeck.cards.shift()
-        //console.log(this.player)
-        let hardSoftPlayer = this.hardSoftPlayer
         
-            if (typeof this.player[this.player.length-1][0] === "number") {
+        let updatedHand = array
+        
+            if (typeof hand[hand.length-1][0] === "number") {
                 
-                hardSoftPlayer[0]+=this.player[this.player.length-1][0]
-                hardSoftPlayer[1]+=this.player[this.player.length-1][0]
+                updatedHand[0]+=hand[hand.length-1][0]
+                updatedHand[1]+=hand[hand.length-1][0]
                     
             }
-            else if (typeof this.player[this.player.length-1][0] === "string") {
-                if (this.player[this.player.length-1][0] === "Ace") {
+            else if (typeof hand[hand.length-1][0] === "string") {
+                if (hand[hand.length-1][0] === "Ace") {
                    
-                    hardSoftPlayer[0]+=11
-                    hardSoftPlayer[1]+=1
+                    updatedHand[0]+=11
+                    updatedHand[1]+=1
                     
                 }
                 else {
                     
-                    hardSoftPlayer[0]+=10
-                    hardSoftPlayer[1]+=10
+                    updatedHand[0]+=10
+                    updatedHand[1]+=10
                     
                 }
             } 
         
-        //console.log(hardSoftPlayer);
-        if (hardSoftPlayer[1] > 21) {
+        if (updatedHand[1] > 21) {
             return console.log("bust, dealer wins");
         }
+        console.log(updatedHand);
     }
 
-    hitDealer() {
+    
+
+   /* hitDealer() {
         this.dealer.push(newDeck.cards[0])
         newDeck.cards.shift()
         //console.log(this.dealer)
@@ -147,7 +143,8 @@ class Player {
            return console.log("bust, player wins");
         }
         
-    }
+    } */
+
     stand() {
         let hardSoftDealer = this.hardSoftDealer
      while (hardSoftDealer[1] < 21 && this.hardSoftPlayer[1] < 21) {
@@ -231,8 +228,10 @@ stand.addEventListener("click",hand.stand())
 
     
     
-    
-
+console.log("player hits");
+hand.hit(hand.player,hand.hardSoftPlayer)
+console.log("dealer hits");
+hand.hit(hand.player,hand.hardSoftPlayer)
 
 
 
@@ -245,9 +244,9 @@ stand.addEventListener("click",hand.stand())
 //hand.hitDealer()
 //console.log("player hits");
 //hand.hitPlayer()
-console.log("player stands,dealers move");
+//console.log("player stands,dealers move");
 //hand.hitPlayer()
-hand.stand()
+//hand.stand()
 
 //console.log(hand.dealer)
 //console.log(newDeck.cards)
