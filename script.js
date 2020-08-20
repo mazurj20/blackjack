@@ -31,6 +31,8 @@ class Player {
     constructor() {
         this.player = []
         this.dealer = []
+        this.hardSoftPlayer = [0,0]
+        this.hardSoftDealer = [0,0]
         for (let i=0;i<4;i++) {
             if (i % 2 === 0) {
                 this.player.push(newDeck.cards[0])
@@ -41,14 +43,129 @@ class Player {
                 newDeck.cards.shift()
             }  
         }
+        
+         let hardSoftPlayer = this.hardSoftPlayer
+        for (let rank of this.player) {
+            if (typeof rank[0] === "number") {
+            
+                hardSoftPlayer[0]+=rank[0]
+                hardSoftPlayer[1]+=rank[0]
+                
+            }
+            else if (typeof rank[0] === "string") {
+                if (rank[0] === "Ace") {
+               
+                    hardSoftPlayer[0]+=11
+                    hardSoftPlayer[1]+=1
+                
+                }
+                else {
+                
+                    hardSoftPlayer[0]+=10
+                    hardSoftPlayer[1]+=10
+                
+                }
+             } 
+        }
+        let hardSoftDealer = this.hardSoftDealer
+
+        for (let rank of this.dealer) {
+            if (typeof rank[0] === "number") {
+            
+                hardSoftDealer[0]+=rank[0]
+                hardSoftDealer[1]+=rank[0]
+                
+            }
+            else if (typeof rank[0] === "string") {
+                if (rank[0] === "Ace") {
+               
+                    hardSoftDealer[0]+=11
+                    hardSoftDealer[1]+=1
+                
+                }
+                else {
+                
+                    hardSoftDealer[0]+=10
+                    hardSoftDealer[1]+=10
+                
+                }
+             } 
+        }
+    console.log(hardSoftDealer);
+    console.log(hardSoftPlayer);
+        
+        
+        
     }
-    hit() {
+    
+    hitPlayer() {
         this.player.push(newDeck.cards[0])
         newDeck.cards.shift()
+        console.log(this.player)
+        let hardSoftPlayer = this.hardSoftPlayer
+        
+            if (typeof this.player[this.player.length-1][0] === "number") {
+                
+                hardSoftPlayer[0]+=this.player[this.player.length-1][0]
+                hardSoftPlayer[1]+=this.player[this.player.length-1][0]
+                    
+            }
+            else if (typeof this.player[this.player.length-1][0] === "string") {
+                if (this.player[this.player.length-1][0] === "Ace") {
+                   
+                    hardSoftPlayer[0]+=11
+                    hardSoftPlayer[1]+=1
+                    
+                }
+                else {
+                    
+                    hardSoftPlayer[0]+=10
+                    hardSoftPlayer[1]+=10
+                    
+                }
+            } 
+        
+        console.log(hardSoftPlayer);
+        if (hardSoftPlayer[1] > 21) {
+            console.log("bust");
+        }
+    }
+
+    hitDealer() {
+        this.dealer.push(newDeck.cards[0])
+        newDeck.cards.shift()
+        console.log(this.dealer)
+        let hardSoftDealer = this.hardSoftDealer
+         
+            if (typeof this.dealer[this.dealer.length-1][0] === "number") {
+                
+                hardSoftDealer[0]+=this.dealer[this.dealer.length-1][0]
+                hardSoftDealer[1]+=this.dealer[this.dealer.length-1][0]
+                    
+            }
+            else if (typeof this.dealer[this.dealer.length-1][0] === "string") {
+                if (this.dealer[this.dealer.length-1][0] === "Ace") {
+                   
+                    hardSoftDealer[0]+=11
+                    hardSoftDealer[1]+=1
+                    
+                }
+                else {
+                    
+                    hardSoftDealer[0]+=10
+                    hardSoftDealer[1]+=10
+                    
+                }
+            } 
+        
+        console.log(hardSoftDealer);
+        if (hardSoftDealer[1] > 21) {
+            console.log("bust");
+        }
+        
     }
     stand() {
-      
-        let hardSoft = [0,0]
+        let hardSoft = this.hardSoft
         for (let rank of this.dealer) {
             if (typeof rank[0] === "number") {
                 
@@ -72,25 +189,39 @@ class Player {
             } 
         }
         console.log(hardSoft);
-
-        let dealerTurn = () => {
-            if (hardSoft[0] === hardSoft[1]) {
-                console.log("no aces");
-            }
-            
+        while (hardSoft[1] < 21) {
+        if (hardSoft[0] < 17 || hardSoft[1] === 17) {
+            this.hitDealer()
         }
-        dealerTurn()
+    }
     }
     
 }
+
+   
+   
+    
+
+    
+    
+    
+
 
 
 
 //console.log(newDeck.cards)
 hand = new Player
-//console.log(hand.player)
-console.log(hand.dealer)
+//console.log(hand.dealer)
+console.log(hand.player)
+//hand.hitDealer()
+hand.hitPlayer()
+
+//hand.hitPlayer()
+//hand.stand()
+
+//console.log(hand.dealer)
 //console.log(newDeck.cards)
 //hand.hit()
+
 //console.log(hand.player)
-console.log(hand.stand())
+//console.log(hand.stand())
