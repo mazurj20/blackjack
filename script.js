@@ -209,18 +209,18 @@ let dealerHand = document.querySelector(".dealerCards")
 
 
 dealerHand.innerText = `${hand.dealer[0]}`
-playerHand.innerText = `${hand.player}`
+playerHand.innerText = `${hand.player} [${hand.hardSoftPlayer}]`
 
 let hit = document.querySelector(".hit")
 let stand = document.querySelector(".stand")
 
 hit.addEventListener("click",() => {
     hand.hit(hand.player,hand.hardSoftPlayer)
-    playerHand.innerText = `${hand.player}`
+    playerHand.innerText = `${hand.player} [${hand.hardSoftPlayer}]`
 })
 stand.addEventListener("click",() => {
     hand.stand()
-    dealerHand.innerText = `${hand.dealer}`
+    dealerHand.innerText = `${hand.dealer} [${hand.hardSoftDealer}]`
     //result.innerText = `${hand.stand()}`
 })
 
