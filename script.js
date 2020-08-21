@@ -1,10 +1,11 @@
+result = document.querySelector(".result")
 class Deck {
     constructor() {
         this.cards = []
         
 
-        const suit = ["hearts", "spades", "clubs", "diamonds"]
-        const rank = ["Ace",2,3,4,5,6,7,8,9,10,"Jack","Queen","King"]
+        const suit = ["H", "S", "C", "D"]
+        const rank = ["A",2,3,4,5,6,7,8,9,10,"J","Q","K"]
 
         for (let i of suit) {
             for (let j of rank) {
@@ -25,6 +26,7 @@ class Deck {
 
 newDeck = new Deck()
 newDeck.shuffle()
+
 
 
 class Player {
@@ -53,7 +55,7 @@ class Player {
                     
                 }
                 else if (typeof rank[0] === "string") {
-                    if (rank[0] === "Ace") {
+                    if (rank[0] === "A") {
                    
                         hardSoftHand[0]+=11
                         hardSoftHand[1]+=1
@@ -90,7 +92,7 @@ class Player {
                     
             }
             else if (typeof hand[hand.length-1][0] === "string") {
-                if (hand[hand.length-1][0] === "Ace") {
+                if (hand[hand.length-1][0] === "A") {
                    
                     updatedHand[0]+=11
                     updatedHand[1]+=1
@@ -106,28 +108,29 @@ class Player {
         
         if (updatedHand[1] > 21) {
             if (hand === this.player) {
-                return console.log(`bust, dealer wins`);
+                result.innerText =`bust, dealer wins`
             }
             else {
-                return console.log("bust, player wins");
+                result.innerText = "bust, player wins"
             }
         }
         console.log(updatedHand);
     }
 
     stand() {
+        
         let dealer = this.hardSoftDealer
         let player = this.hardSoftPlayer
         let whoWins = (dealerIndex=0,playerIndex=0) => {
             
             if (dealer[dealerIndex] > player[playerIndex]) {
-                return console.log("dealer wins");
+                result.innerText = "dealer wins"
             }
             else if (dealer[dealerIndex] < player[playerIndex]) {
-                return console.log("player wins");
+                result.innerText = "player wins"
             }
             else {
-                return console.log("push");
+                result.innerText = "push"
             }
         }
         
@@ -190,14 +193,29 @@ class Player {
 
 hand = new Player
 
+let playerHand = document.querySelector(".playerCards")
+let dealerHand = document.querySelector(".dealerCards")
+
+
+dealerHand.innerText = `${hand.dealer[0]}`
+playerHand.innerText = `${hand.player}`
 
 let hit = document.querySelector(".hit")
 let stand = document.querySelector(".stand")
 
 hit.addEventListener("click",() => {
-    hand.hit(hand.player,hand.hardSoftPlayer)})
+    hand.hit(hand.player,hand.hardSoftPlayer)
+    playerHand.innerText = `${hand.player}`
+})
 stand.addEventListener("click",() => {
-    hand.stand()})
+    hand.stand()
+    dealerHand.innerText = `${hand.dealer}`
+    //result.innerText = `${hand.stand()}`
+})
+
+
+
+
  
 
 /* console.log("player hits");
@@ -207,4 +225,15 @@ console.log("player stands,dealers move");
 hand.stand()
 
 */
+
+
+
+/* let url = `https://deckofcardsapi.com/api/deck/new/draw/?cards=AS`
+fetch(url)
+    .then(res => res.json())
+    .then(res => {
+        console.log(res);
+
+    })
+    */
 
