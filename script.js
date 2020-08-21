@@ -71,7 +71,8 @@ class Player {
         }
         console.log("player count");
         hardSoft(this.hardSoftPlayer,this.player)
-        console.log("dealer count");
+        console.log("dealer showing");
+        //console.log(this.dealer[0])
         hardSoft(this.hardSoftDealer,this.dealer)
         
     }
@@ -104,7 +105,12 @@ class Player {
             } 
         
         if (updatedHand[1] > 21) {
-            return console.log("bust, dealer wins");
+            if (hand === this.player) {
+                return console.log(`bust, dealer wins`);
+            }
+            else {
+                return console.log("bust, player wins");
+            }
         }
         console.log(updatedHand);
     }
@@ -129,9 +135,11 @@ class Player {
      
         if ((((dealer[0] <= 17 || (dealer[1] < 17 && dealer[0] > 21)) && dealer[0] !== dealer[1]) || (dealer[0] === dealer[1]) && dealer[0] < 17 )) {
             this.hit(this.dealer,this.hardSoftDealer)
+            
             this.stand()
             }
         else {
+            if (dealer[1] < 21) {
             
             if (dealer[0] === dealer [1] && player[0] === player[1]) {
                 whoWins()
@@ -168,6 +176,7 @@ class Player {
                     whoWins()
                 }
             }
+            }
         }
       
     
@@ -176,30 +185,26 @@ class Player {
 
 }
     
-    
+
 
 
 hand = new Player
 
 
+let hit = document.querySelector(".hit")
+let stand = document.querySelector(".stand")
 
+hit.addEventListener("click",() => {
+    hand.hit(hand.player,hand.hardSoftPlayer)})
+stand.addEventListener("click",() => {
+    hand.stand()})
+ 
 
-//console.log(newDeck.cards)
-
-//console.log("dealer hand");
-//console.log(hand.dealer)
-//console.log("player hand");
-//console.log(hand.player)
-//hand.hitDealer()
-console.log("player hits");
+/* console.log("player hits");
 hand.hit(hand.player,hand.hardSoftPlayer)
 console.log("player stands,dealers move");
-//hand.hitPlayer()
+
 hand.stand()
 
-//console.log(hand.dealer)
-//console.log(newDeck.cards)
-//hand.hit()
+*/
 
-//console.log(hand.player)
-//console.log(hand.stand())
