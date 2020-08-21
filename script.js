@@ -1,4 +1,5 @@
 result = document.querySelector(".result")
+//ANCHOR create deck
 class Deck {
     constructor() {
         this.cards = []
@@ -13,7 +14,7 @@ class Deck {
             }
         }
     }
-
+    //ANCHOR shuffle deck
     shuffle() {
         for (let i = this.cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -35,6 +36,7 @@ class Player {
         this.dealer = []
         this.hardSoftPlayer = [0,0]
         this.hardSoftDealer = [0,0]
+        //ANCHOR deal out cards
         for (let i=0;i<4;i++) {
             if (i % 2 === 0) {
                 this.player.push(newDeck.cards[0])
@@ -45,6 +47,7 @@ class Player {
                 newDeck.cards.shift()
             }  
         }
+        //ANCHOR get count for hands
         let hardSoft = (array,hand) => {
             let hardSoftHand = array
             for (let rank of hand) {
@@ -69,16 +72,16 @@ class Player {
                     }
                  } 
             }
-            console.log(hardSoftHand)
+            return hardSoftHand
         }
         console.log("player count");
         hardSoft(this.hardSoftPlayer,this.player)
         console.log("dealer showing");
-        //console.log(this.dealer[0])
+        
         hardSoft(this.hardSoftDealer,this.dealer)
         
     }
-    
+    //ANCHOR adds card to hand
     hit(hand,array) {
         hand.push(newDeck.cards[0])
         newDeck.cards.shift()
@@ -118,7 +121,7 @@ class Player {
     }
 
     stand() {
-        
+        //ANCHOR player stands, dealers move
         let dealer = this.hardSoftDealer
         let player = this.hardSoftPlayer
         let whoWins = (dealerIndex=0,playerIndex=0) => {
@@ -135,25 +138,31 @@ class Player {
         }
         
     
-     
+     //ANCHOR if true, dealer hits
+     //dealer hits on soft 17, or hard 16 and under
         if ((((dealer[0] <= 17 || (dealer[1] < 17 && dealer[0] > 21)) && dealer[0] !== dealer[1]) || (dealer[0] === dealer[1]) && dealer[0] < 17 )) {
             this.hit(this.dealer,this.hardSoftDealer)
             
             this.stand()
             }
         else {
+            //ANCHOR compare cards
             if (dealer[1] < 21) {
-            
+            //no aces
             if (dealer[0] === dealer [1] && player[0] === player[1]) {
                 whoWins()
             }
+            //both aces
             else if (dealer[0] !== dealer [1] && player[0] !== player[1]) {
+                //ace is 1
                 if (dealer[0] > 21 && player[0] > 21) {
                     whoWins(1,1)
                 }
+                //ace is 11
                 else if (dealer[0] < 21 && player[0] < 21) {
                     whoWins()
                 }
+                // ace is 1 for dealer and 11 for player
                 else if (dealer[0] > 21 && player[0] < 21) {
                     whoWins(1,0)
                 }
@@ -162,6 +171,7 @@ class Player {
                 }
                 
             }
+            //[player has ace
             else if (dealer[0] === dealer [1] && player[0] !== player[1]) {
                 if (player[0] > 21) {
                     whoWins(0,1)
@@ -193,6 +203,7 @@ class Player {
 
 hand = new Player
 
+//ANCHOR events
 let playerHand = document.querySelector(".playerCards")
 let dealerHand = document.querySelector(".dealerCards")
 
