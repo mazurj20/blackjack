@@ -109,129 +109,78 @@ class Player {
         console.log(updatedHand);
     }
 
-    
-
-   /* hitDealer() {
-        this.dealer.push(newDeck.cards[0])
-        newDeck.cards.shift()
-        //console.log(this.dealer)
-        let hardSoftDealer = this.hardSoftDealer
-         
-            if (typeof this.dealer[this.dealer.length-1][0] === "number") {
-                
-                hardSoftDealer[0]+=this.dealer[this.dealer.length-1][0]
-                hardSoftDealer[1]+=this.dealer[this.dealer.length-1][0]
-                    
+    stand() {
+        let dealer = this.hardSoftDealer
+        let player = this.hardSoftPlayer
+        let whoWins = (dealerIndex=0,playerIndex=0) => {
+            
+            if (dealer[dealerIndex] > player[playerIndex]) {
+                return console.log("dealer wins");
             }
-            else if (typeof this.dealer[this.dealer.length-1][0] === "string") {
-                if (this.dealer[this.dealer.length-1][0] === "Ace") {
-                   
-                    hardSoftDealer[0]+=11
-                    hardSoftDealer[1]+=1
-                    
-                }
-                else {
-                    
-                    hardSoftDealer[0]+=10
-                    hardSoftDealer[1]+=10
-                    
-                }
-            } 
-        
-        console.log(hardSoftDealer);
-        if (hardSoftDealer[1] > 21) {
-           return console.log("bust, player wins");
+            else if (dealer[dealerIndex] < player[playerIndex]) {
+                return console.log("player wins");
+            }
+            else {
+                return console.log("push");
+            }
         }
         
-    } */
-
-    stand() {
-        let hardSoftDealer = this.hardSoftDealer
-     while (hardSoftDealer[1] < 21 && this.hardSoftPlayer[1] < 21) {
-        if (((hardSoftDealer[1] < 17 && hardSoftDealer[0] !== hardSoftDealer[1]) || (hardSoftDealer[0] === hardSoftDealer[1]) && hardSoftDealer[0] < 17 ) && /*(hardSoftDealer[0] < this.hardSoftPlayer[0] || hardSoftDealer[1] < this.hardSoftPlayer[1]) && */ this.hardSoftPlayer[0] <=21 ) {
-            this.hitDealer()
+    
+     
+        if ((((dealer[0] <= 17 || (dealer[1] < 17 && dealer[0] > 21)) && dealer[0] !== dealer[1]) || (dealer[0] === dealer[1]) && dealer[0] < 17 )) {
+            this.hit(this.dealer,this.hardSoftDealer)
+            this.stand()
             }
         else {
-            if (hardSoftDealer[0] === hardSoftDealer[1] && this.hardSoftPlayer[0] === this.hardSoftPlayer[1]) {
-                if (hardSoftDealer[0] > this.hardSoftPlayer[0]) {
-                    return console.log("dealer wins");
-                }
-                else if (hardSoftDealer[0] < this.hardSoftPlayer[0]) {
-                   return console.log("player wins");
-                }
-                else {
-                    return console.log("push");
-                }
+            
+            if (dealer[0] === dealer [1] && player[0] === player[1]) {
+                whoWins()
             }
-            else if (hardSoftDealer[0] === hardSoftDealer[1] && this.hardSoftPlayer[0] !== this.hardSoftPlayer[1]) {
-                if (this.hardSoftPlayer[0] <= 21) {
-                    if (hardSoftDealer[0] > this.hardSoftPlayer[0]) {
-                       return console.log("dealer wins");
-                    }
-                    else if (hardSoftDealer[0] < this.hardSoftPlayer[0]){
-                       return console.log("player wins");
-                    }
-                    else {
-                        return console.log("push");
-                    }
+            else if (dealer[0] !== dealer [1] && player[0] !== player[1]) {
+                if (dealer[0] > 21 && player[0] > 21) {
+                    whoWins(1,1)
+                }
+                else if (dealer[0] < 21 && player[0] < 21) {
+                    whoWins()
+                }
+                else if (dealer[0] > 21 && player[0] < 21) {
+                    whoWins(1,0)
                 }
                 else {
-                    if (hardSoftDealer[0] > this.hardSoftPlayer[1]) {
-                      return console.log("dealer wins");
-                    }
-                    else if (hardSoftDealer[0] < this.hardSoftPlayer[1]){
-                       return console.log("player wins");
-                    }
-                    else {
-                        return console.log("push");
-                    }
+                    whoWins(0,1)
                 }
-            }  
-            else if (hardSoftDealer[0] !== hardSoftDealer[1] && this.hardSoftPlayer[0] === this.hardSoftPlayer[1]) {
-                if (hardSoftDealer[0] <= 21) {
-                    if (hardSoftDealer[0] > this.hardSoftPlayer[0]) {
-                      return  console.log("dealer wins");
-                    }
-                    else if (hardSoftDealer[0] < this.hardSoftPlayer[0]) {
-                       return console.log("player wins");
-                    }
-                    else {
-                        return console.log("push");
-                    }
-                }
-                else {
-                    if (hardSoftDealer[1] > this.hardSoftPlayer[0]) {
-                       return console.log("dealer wins");
-                    }
-                    else {
-                      return  console.log("player wins");
-                    }
-                }
-            }
                 
+            }
+            else if (dealer[0] === dealer [1] && player[0] !== player[1]) {
+                if (player[0] > 21) {
+                    whoWins(0,1)
+                }
+                else {
+                    whoWins()
+                }
+                
+            }
+            else {
+                if (dealer[0] > 21) {
+                    whoWins(1,0)
+                }
+                else {
+                    whoWins()
+                }
+            }
         }
-        this.stand()
-    }
-    }
+      
+    
     
 }
 
+}
+    
+    
+
 
 hand = new Player
-   
-/* let hit = document.querySelector(".hit")
-let stand = document.querySelector(".stand")
 
-hit.addEventListener("click",hand.hitPlayer())
-stand.addEventListener("click",hand.stand())
-*/
-
-    
-    
-console.log("player hits");
-hand.hit(hand.player,hand.hardSoftPlayer)
-console.log("dealer hits");
-hand.hit(hand.player,hand.hardSoftPlayer)
 
 
 
@@ -242,11 +191,11 @@ hand.hit(hand.player,hand.hardSoftPlayer)
 //console.log("player hand");
 //console.log(hand.player)
 //hand.hitDealer()
-//console.log("player hits");
+console.log("player hits");
+hand.hit(hand.player,hand.hardSoftPlayer)
+console.log("player stands,dealers move");
 //hand.hitPlayer()
-//console.log("player stands,dealers move");
-//hand.hitPlayer()
-//hand.stand()
+hand.stand()
 
 //console.log(hand.dealer)
 //console.log(newDeck.cards)
